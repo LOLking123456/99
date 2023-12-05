@@ -1,0 +1,41 @@
+
+
+
+if game:GetService("CoreGui"):FindFirstChild("ScreenGui") then
+game:GetService("CoreGui").ScreenGui:Destroy()
+getgenv().Farming1 = false
+end
+
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/LOLking123456/ui12/main/testing23"))()
+local client = game:GetService("Players").LocalPlayer
+local main1 = library:CreateWindow("Pet Sim 99 LH")
+
+
+main1:AddButton({text = "Auto Fishing", flag = "Discord", callback = function()
+
+
+end})
+
+main1:AddToggle({text = "Anti AFK (Won't Get Kicked)", flag = "Discord", callback = function(s)
+local vu = game:GetService("VirtualUser")
+
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+
+   wait(1)
+
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+
+end)
+
+end})
+
+
+
+main1:AddButton({text = "FPS Boost (No Lag)", flag = "Discord", callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/LOLking123456/fps/main/boost"))()
+
+end})
+
+library:Init()
