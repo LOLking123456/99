@@ -1,23 +1,22 @@
 
 
 
-if game:GetService("CoreGui"):FindFirstChild("ScreenGui") then
-game:GetService("CoreGui").ScreenGui:Destroy()
-getgenv().Farming1 = false
-end
-
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/LOLking123456/ui12/main/testing23"))()
-local client = game:GetService("Players").LocalPlayer
-local main1 = library:CreateWindow("Pet Sim 99 LH")
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 
 
-main1:AddButton({text = "Auto Fishing", flag = "Discord", callback = function()
+local Window = Library.CreateLib("Pet Simulator 99 | LH", "BloodTheme")
+
+local Tab = Window:NewTab("Main")
+
+local Section = Tab:NewSection("Main")
+
+Section:NewToggle("Auto Fishing", "Be Close To Fish Area", function()
+
+  end)
 
 
-end})
-
-main1:AddToggle({text = "Anti AFK (Won't Get Kicked)", flag = "Discord", callback = function(s)
-local vu = game:GetService("VirtualUser")
+Section:NewButton("Anti AFK (Won't Get Kicked)", "Stay In Server For Long Without Getting Kicked", function()
+ local vu = game:GetService("VirtualUser")
 
 game:GetService("Players").LocalPlayer.Idled:connect(function()
 
@@ -28,14 +27,39 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 
 end)
-
-end})
-
+end)
 
 
-main1:AddButton({text = "FPS Boost (No Lag)", flag = "Discord", callback = function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/LOLking123456/fps/main/boost"))()
+Section:NewButton("FPS Boost (No Lag)", "Go To Void!", function()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/LOLking123456/fps/main/boost"))()
 
-end})
+    end)
 
-library:Init()
+Section:NewButton("FPS Boost 2", "Peak under the field!", function()
+   for _,v in pairs(workspace:GetDescendants()) do
+if v.ClassName == "Part"
+or v.ClassName == "SpawnLocation"
+or v.ClassName == "WedgePart"
+or v.ClassName == "Terrain"
+or v.ClassName == "MeshPart" then
+v.Material = "Plastic"
+end
+end
+end)
+
+
+
+Section:NewSlider("Walkspeed", "Speed", 200, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
+ getgenv().WalkSpeedValue = (s); --set your desired walkspeed here
+local Player = game:service'Players'.LocalPlayer;
+Player.Character.Humanoid:GetPropertyChangedSignal'WalkSpeed':Connect(function()
+Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
+end)
+Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
+end)
+
+
+
+
+
+
